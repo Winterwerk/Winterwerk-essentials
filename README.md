@@ -1,1 +1,0 @@
-# Winterwerk-essentials
