@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Winterwerk Essentials | Drop 01</title>
     
-    <!-- Edle Schriftarten von Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Edle Schriftarten von Google Fonts (Neu: Great Vibes für das Schreibschrift-Logo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         /* Basis-Design (Dark Mode) */
         :root {
-            --bg-color: #050505;
+            --bg-color: #030303; /* Noch tieferes Schwarz */
             --text-light: #f3f3f3;
             --text-dim: #a1a1aa;
             --amber-glow: rgba(255, 170, 50, 0.6);
-            --amber-bright: #ffaa32;
+            --amber-bright: #d4af37; /* Edles Gold */
         }
 
         body, html {
@@ -31,20 +31,22 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
-        /* Hintergrund-Leuchten (wird von der Flamme geworfen) */
         .ambient-light {
             position: absolute;
-            top: 40%;
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--amber-glow) 0%, transparent 60%);
+            width: 70vw;
+            height: 70vw;
+            max-width: 600px;
+            max-height: 600px;
+            background: radial-gradient(circle, var(--amber-glow) 0%, transparent 65%);
             opacity: 0.15;
             z-index: 0;
-            animation: ambient-flicker 3s infinite alternate;
+            animation: ambient-flicker 4s infinite alternate;
             pointer-events: none;
         }
 
@@ -55,93 +57,166 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
             width: 100%;
-            max-width: 500px;
-            padding: 0 20px;
+            max-width: 450px;
+            padding: 0 25px; /* Besseres Mobile-Padding */
+            box-sizing: border-box;
         }
 
-        /* Branding */
-        h1 {
+        /* --- LOGO SECTION (Schlängel-Effekt) --- */
+        .logo-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .logo-main {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            margin: 0 0 2rem 0;
-            color: var(--text-dim);
+            margin: 0;
+            color: #ffffff;
+            display: flex;
         }
 
-        /* Der Timer */
+        /* Schichten für den optischen Webe-Effekt */
+        .logo-layer-front {
+            position: relative;
+            z-index: 4; /* Vor der Schreibschrift */
+        }
+        
+        .logo-layer-back {
+            position: relative;
+            z-index: 2; /* Hinter der Schreibschrift */
+        }
+
+        .logo-accent {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            color: var(--amber-bright);
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-7deg);
+            z-index: 3; /* Zwischen den Buchstaben */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+            white-space: nowrap;
+            opacity: 0.9;
+        }
+
+        /* --- TIMER --- */
+        .timer-container {
+            margin-top: -10px;
+        }
+
         .timer {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 10vw, 4rem);
             font-weight: 400;
             letter-spacing: 0.05em;
             color: #fff;
-            text-shadow: 0 10px 30px var(--amber-glow);
+            text-shadow: 0 10px 25px var(--amber-glow);
             animation: text-flicker 3s infinite alternate;
         }
 
         .timer-labels {
             display: flex;
             justify-content: center;
-            gap: 2.8rem;
-            font-size: 0.7rem;
+            gap: clamp(1.5rem, 6vw, 2.8rem);
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             color: var(--amber-bright);
-            margin-top: -10px;
+            margin-top: -5px;
         }
 
-        /* Die CSS-Kerze */
+        /* --- REALISTISCHE KERZE (Amber Glass & Holzdocht) --- */
         .candle-container {
             position: relative;
-            height: 120px;
+            height: 140px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            margin: 2rem 0;
+            margin: 1rem 0;
         }
 
+        /* Die Flamme */
         .flame {
-            width: 15px;
-            height: 35px;
-            background: radial-gradient(ellipse at bottom, #ffffff 10%, #ffaa32 50%, transparent 100%);
+            width: 16px;
+            height: 40px;
+            background: radial-gradient(ellipse at bottom, #ffffff 10%, #ffdf73 30%, #ff8c00 70%, transparent 100%);
             border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
-            box-shadow: 0 0 20px 5px var(--amber-glow);
-            animation: flame-flicker 0.1s infinite alternate;
-            margin-bottom: 2px;
-        }
-
-        .wick {
-            width: 2px;
-            height: 10px;
-            background: #111;
-            border-radius: 2px;
-        }
-
-        .wax {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(to bottom, #2a2a2a, #111111);
-            border-radius: 3px 3px 10px 10px;
-            box-shadow: inset 0 5px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 0 25px 8px rgba(255, 170, 50, 0.5), 0 -10px 30px rgba(255, 100, 0, 0.4);
+            animation: flame-flicker 0.15s infinite alternate;
+            margin-bottom: 0px;
             position: relative;
+            z-index: 5;
+        }
+
+        /* Das glühende Zentrum der Flamme */
+        .flame::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #fff;
+        }
+
+        /* Der Holzdocht */
+        .wood-wick {
+            width: 6px;
+            height: 14px;
+            background: linear-gradient(to right, #1a0a00, #3a1f04, #1a0a00);
+            border-radius: 1px;
+            margin-bottom: -4px;
+            position: relative;
+            z-index: 4;
+            box-shadow: 0 -2px 5px rgba(255,50,0,0.8); /* Glut */
+        }
+
+        /* Das Amber-Glas */
+        .glass-jar {
+            width: 75px;
+            height: 85px;
+            background: linear-gradient(to right, rgba(40, 20, 5, 0.95), rgba(90, 45, 10, 0.8), rgba(40, 20, 5, 0.95));
+            border-radius: 4px 4px 10px 10px;
+            position: relative;
+            box-shadow: 
+                inset 0 -10px 20px rgba(0,0,0,0.9),
+                inset 0 0 15px rgba(0,0,0,0.8), 
+                0 15px 25px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 2px solid rgba(255, 200, 100, 0.3); /* Lichtkante am Glasrand */
+            z-index: 3;
+            overflow: hidden;
         }
         
-        .wax::before {
+        /* Flüssiger Wachsspiegel im Glas */
+        .glass-jar::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 8px;
-            background: rgba(255, 170, 50, 0.2);
+            height: 15px;
+            background: radial-gradient(ellipse at center, rgba(255, 170, 50, 0.4) 0%, rgba(0,0,0,0.8) 80%);
             border-radius: 50%;
+            margin-top: -7px;
+            box-shadow: inset 0 0 5px rgba(255,255,255,0.1);
         }
 
-        /* Formular Bereich */
+        /* --- FORMULAR BEREICH --- */
         .form-section {
             width: 100%;
         }
@@ -149,60 +224,69 @@
         .form-section p {
             font-size: 0.85rem;
             color: var(--text-dim);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+            margin-bottom: 1.8rem;
+            line-height: 1.6;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
+            width: 100%;
         }
 
         input[type="email"] {
             width: 100%;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            border-radius: 6px;
             color: #fff;
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             box-sizing: border-box;
             outline: none;
             transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        input[type="email"]::placeholder {
+            color: #666;
         }
 
         input[type="email"]:focus {
             border-color: var(--amber-bright);
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
         }
 
         button {
             width: 100%;
-            padding: 15px 20px;
-            background: var(--text-light);
-            color: var(--bg-color);
+            padding: 16px 20px;
+            background: linear-gradient(to right, #e0e0e0, #ffffff);
+            color: #000000;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 0.95rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         button:hover {
             background: var(--amber-bright);
-            box-shadow: 0 0 15px rgba(255, 170, 50, 0.4);
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
         }
 
-        /* Animationen */
+        /* --- ANIMATIONEN --- */
         @keyframes flame-flicker {
             0% { transform: scale(1) rotate(-1deg); opacity: 0.9; }
-            100% { transform: scale(1.05) rotate(1deg); opacity: 1; }
+            100% { transform: scale(1.03) rotate(1deg); opacity: 1; }
         }
 
         @keyframes ambient-flicker {
@@ -211,15 +295,8 @@
         }
 
         @keyframes text-flicker {
-            0% { text-shadow: 0 5px 20px rgba(255, 170, 50, 0.4); }
-            100% { text-shadow: 0 10px 30px rgba(255, 170, 50, 0.7); }
-        }
-
-        /* Mobile Anpassung */
-        @media (max-width: 600px) {
-            .timer { font-size: 3rem; }
-            .timer-labels { gap: 1.8rem; font-size: 0.6rem; }
-            .ambient-light { width: 400px; height: 400px; }
+            0% { text-shadow: 0 5px 20px rgba(255, 170, 50, 0.3); }
+            100% { text-shadow: 0 10px 30px rgba(255, 170, 50, 0.6); }
         }
     </style>
 </head>
@@ -228,11 +305,19 @@
     <div class="ambient-light"></div>
 
     <div class="content-wrapper">
-        <header>
-            <h1>Winterwerk</h1>
+        
+        <!-- Das verwobene Logo -->
+        <header class="logo-container">
+            <h1 class="logo-main">
+                <span class="logo-layer-front">WINT</span>
+                <span class="logo-layer-back">ERW</span>
+                <span class="logo-layer-front">ERK</span>
+            </h1>
+            <span class="logo-accent">Essentials</span>
         </header>
 
-        <div>
+        <!-- Countdown -->
+        <div class="timer-container">
             <div id="countdown" class="timer">00:00:00:00</div>
             <div class="timer-labels">
                 <span>Tage</span>
@@ -242,16 +327,17 @@
             </div>
         </div>
 
+        <!-- Realistische Glas-Kerze -->
         <div class="candle-container">
             <div class="flame"></div>
-            <div class="wick"></div>
-            <div class="wax"></div>
+            <div class="wood-wick"></div>
+            <div class="glass-jar"></div>
         </div>
 
+        <!-- Formular -->
         <div class="form-section">
             <p>Drop 01. The Aesthetic Collection.<br>Streng limitiert auf 50 Unikate.</p>
             
-            <!-- Ersetzen Sie "DEINE_FORMSPREE_ID" durch Ihren Formspree Link -->
             <form action="https://formspree.io/f/DEINE_FORMSPREE_ID" method="POST" class="form-group">
                 <input type="email" name="email" placeholder="Deine E-Mail Adresse" required>
                 <button type="submit">VIP-Zugang sichern</button>
@@ -260,9 +346,7 @@
     </div>
 
     <script>
-        // Ziel-Datum: 1. Oktober 2026, 10:00:00 Uhr
         const targetDate = new Date('October 1, 2026 10:00:00').getTime();
-
         const countdownElement = document.getElementById('countdown');
 
         function updateCountdown() {
@@ -279,13 +363,10 @@
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-            // Führende Nullen hinzufügen
             const formatTime = (time) => time < 10 ? `0${time}` : time;
-
             countdownElement.innerHTML = `${formatTime(days)}:${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
         }
 
-        // Timer jede Sekunde aktualisieren
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
