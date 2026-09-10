@@ -9,6 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
+        /* WICHTIGER FIX: Box-Sizing für alle Elemente, damit nichts aus der Mitte rutscht */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         /* Basis-Design (Dark Mode mit Messing/Bronze Akzenten) */
         :root {
             --bg-color: #030303;
@@ -26,7 +31,6 @@
             color: var(--text-light);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            box-sizing: border-box;
             scroll-behavior: smooth;
         }
 
@@ -67,7 +71,7 @@
             background-color: var(--panel-bg);
             border-left: 1px solid rgba(255,255,255,0.03);
             z-index: 100; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 40px 30px; box-sizing: border-box;
+            padding: 40px 30px; 
             display: flex; flex-direction: column;
             overflow-y: auto;
         }
@@ -189,7 +193,7 @@
         .form-section { 
             width: 100%; max-width: 420px; text-align: center; 
             scroll-margin-top: 100px; 
-            margin-bottom: 4rem; /* Abstand zum nächsten Bereich */
+            margin-bottom: 2rem; 
         }
         
         .copy-text { margin-bottom: 2rem; }
@@ -206,7 +210,7 @@
             background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 4px; color: #fff;
             font-family: 'Inter', sans-serif; font-size: 1rem;
-            box-sizing: border-box; text-align: center; outline: none;
+            text-align: center; outline: none;
             transition: all 0.3s ease;
         }
         input[type="email"]:focus { border-color: var(--brass); background: rgba(255, 255, 255, 0.05); }
@@ -233,10 +237,10 @@
         }
         .success-message p { margin: 0; color: var(--text-light); font-size: 0.9rem; }
 
-        /* --- NEU: STORY / ERKLÄRUNGS-SEKTION --- */
+        /* --- STORY / ERKLÄRUNGS-SEKTION --- */
         .story-container {
-            width: 100%; max-width: 600px;
-            margin: 0 auto 60px auto;
+            width: 100%; max-width: 650px;
+            margin: 0 auto 80px auto; /* 0 oben, automatisch links/rechts (zentriert), 80px unten */
             padding: 0 25px;
             position: relative; z-index: 10;
         }
@@ -383,12 +387,12 @@
         </div>
     </main>
 
-    <!-- 2. STORY & ERKLÄRUNG (NEU) -->
+    <!-- 2. STORY & ERKLÄRUNG -->
     <section class="story-container">
         <div class="story-content">
             <h2>Was verbirgt sich im Dunkeln?</h2>
             
-            <p>Bevor du dich auf unsere Liste setzt, möchten wir ganz offen zu dir sein: Was genau hier in unserem Atelier in Schönefeld entsteht, ist im Moment noch ein gut gehütetes Geheimnis. 🤫</p>
+            <p>Bevor du dich auf unsere Liste setzt, möchten wir ganz offen zu dir sein: Was genau hier in unserem Atelier in Schönefeld entsteht, ist im Moment noch ein gut gehütetes Geheimnis.</p>
             
             <p>Aber so viel dürfen wir verraten: Stell dir vor, du könntest bald deine absolut perfekte Kerze kreieren. Wir tüfteln gerade an hunderten von Kombinationsmöglichkeiten aus komplexen Parfümölen, edlen Gläsern, Dochten und Wachsfarben, damit am Ende etwas entsteht, das zu 100 % deine Handschrift trägt.</p>
             
@@ -402,7 +406,7 @@
 
             <p>Kein Spam. Nur ein kurzes Update, sobald der Konfigurator freigeschaltet wird.</p>
 
-            <!-- 3. ZWEITES FORMULAR (Damit man nicht hochscrollen muss) -->
+            <!-- 3. ZWEITES FORMULAR -->
             <div class="bottom-cta-section">
                 <h3>Bereit für dein Unikat?</h3>
                 <form action="https://formspree.io/f/xoeqrdaz" method="POST" class="form-group waitlist-form">
